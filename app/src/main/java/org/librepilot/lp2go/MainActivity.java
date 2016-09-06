@@ -69,6 +69,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.squareup.leakcanary.LeakCanary;
 
 import org.librepilot.lp2go.controller.ViewController;
 import org.librepilot.lp2go.controller.ViewController3DMagCal;
@@ -485,6 +486,8 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         VisualLog.setActivity(this);
+
+        LeakCanary.install(this.getApplication());
 
         mViews = new HashMap<>(NUM_OF_VIEWS);
         //ViewController mVcDebug =
