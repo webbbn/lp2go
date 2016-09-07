@@ -18,6 +18,7 @@ package org.librepilot.lp2go.menu;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,9 +66,9 @@ public class MenuListAdapter extends BaseAdapter {
         ImageView imgIcon = (ImageView) convertView.findViewById(R.id.icon);
         TextView txtTitle = (TextView) convertView.findViewById(R.id.title);
 
-        //if ((imgIcon.getDrawable()) != null) {
-        //    ((BitmapDrawable)imgIcon.getDrawable()).getBitmap().recycle();
-        //}
+        if ((imgIcon.getDrawable()) != null) {
+            ((BitmapDrawable) imgIcon.getDrawable()).getBitmap().recycle();
+        }
 
         imgIcon.setImageResource(menuItems.get(position).getIcon());
         txtTitle.setText(menuItems.get(position).getTitle());
