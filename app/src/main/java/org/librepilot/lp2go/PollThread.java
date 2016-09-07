@@ -34,6 +34,7 @@ public class PollThread extends Thread {
     private int request = 0;
 
     public PollThread(MainActivity activity) {
+        MainActivity.rw.watch(this);
         this.setName("LP2GoPollThread");
         if (!MainActivity.hasPThread()) {
             MainActivity.setPThread(true);

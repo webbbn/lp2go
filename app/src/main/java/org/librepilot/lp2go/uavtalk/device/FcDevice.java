@@ -56,6 +56,7 @@ public abstract class FcDevice {
     private long mLogStartTimeStamp;
     private int mUavTalkConnectionState = 0x00;
     FcDevice(MainActivity mActivity) throws IllegalStateException {
+        MainActivity.rw.watch(this);
         this.mActivity = mActivity;
         nackedObjects = new HashSet<>();
     }

@@ -67,6 +67,7 @@ public abstract class ViewController {
 
     ViewController(MainActivity activity, int title, int icon, int localSettingsVisible,
                    int flightSettingsVisible) {
+        MainActivity.rw.watch(this);
         this.mActivity = activity;
         mOffset = new HashMap<>();
         mBlink = false;

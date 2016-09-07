@@ -70,7 +70,9 @@ import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 
+import org.androidannotations.annotations.EActivity;
 import org.librepilot.lp2go.controller.ViewController;
 import org.librepilot.lp2go.controller.ViewController3DMagCal;
 import org.librepilot.lp2go.controller.ViewControllerAbout;
@@ -114,6 +116,7 @@ import java.util.zip.ZipInputStream;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+@EActivity
 public class MainActivity extends AppCompatActivity {
     public static final int CALLBACK_FILEPICKER_UAVO = 3456;
     public static final int CALLBACK_TTS = 6574;
@@ -126,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int NUM_OF_VIEWS = 12; //TODO: NEEDED?
     private static final String ASSETS_LOGS_INTERNAL_PATH = "logs";
     private static final String ASSETS_UAVO_INTERNAL_PATH = "uavo";
+    public static RefWatcher rw;
     static int mCurrentView = 0;
     private static boolean mHasPThread = false;
     public ImageView imgSerial;
@@ -485,6 +489,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        MainActivity.rw = LeakCanary.install(this.getApplication());
+        //MainActivity.rw.watch(this);
+
         VisualLog.setActivity(this);
 
         LeakCanary.install(this.getApplication());
@@ -499,10 +507,10 @@ public class MainActivity extends AppCompatActivity {
         mTtsHelper = new TextToSpeechHelper(this);
 
         //debug view is initialized above
-        ViewController mVcParentTuning = new ViewControllerTuningParent(this, R.string.menu_parent_tuning,
-                R.drawable.ic_tune_24dp, View.INVISIBLE, View.INVISIBLE);
         ViewController mVcScope = new ViewControllerScope(this, R.string.menu_scope,
                 R.drawable.ic_timeline_black_24dp, View.INVISIBLE, View.INVISIBLE);
+        ViewController mVcParentTuning = new ViewControllerTuningParent(this, R.string.menu_parent_tuning,
+                R.drawable.ic_tune_24dp, View.INVISIBLE, View.INVISIBLE);
         ViewController mVcAbout = new ViewControllerAbout(this, R.string.menu_about,
                 R.drawable.ic_info_outline_24dp, View.INVISIBLE, View.INVISIBLE);
         ViewController mVcLogs = new ViewControllerLogs(this, R.string.menu_logs,

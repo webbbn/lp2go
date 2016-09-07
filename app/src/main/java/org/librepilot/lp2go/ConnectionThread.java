@@ -25,12 +25,13 @@ import org.librepilot.lp2go.uavtalk.device.FcDevice;
 import org.librepilot.lp2go.ui.SingleToast;
 
 public class ConnectionThread extends Thread {
-    private final MainActivity mA;
+    private MainActivity mA;
     private boolean mIsValid = true;
     private String mReplayLogFile = null;
     private FcDevice.GuiEventListener mGuiEventListener = null;
 
     public ConnectionThread(MainActivity activity) {
+        MainActivity.rw.watch(this);
         this.setName("LP2GoConnectionThread");
         this.mA = activity;
     }
@@ -42,6 +43,7 @@ public class ConnectionThread extends Thread {
     public void setInvalid() {
         mIsValid = false;
     }
+
 
     @Override
     public void run() {
@@ -138,6 +140,7 @@ public class ConnectionThread extends Thread {
             } catch (InterruptedException ignored) {
             }
         }
+        this.mA = null;
     }
 
     public void setGuiEventListener(FcDevice.GuiEventListener gel) {
