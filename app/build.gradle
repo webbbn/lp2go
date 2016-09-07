@@ -11,8 +11,8 @@ android {
 
         multiDexEnabled true
 
-        versionName '0.3.0.36'
-        versionCode 30036
+        versionName '0.3.0.37'
+        versionCode 30037
     }
 
     dexOptions {
@@ -79,6 +79,8 @@ android {
     }
 }
 
+def AAVersion = '4.1.0'
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
 
@@ -101,6 +103,8 @@ dependencies {
     compile 'com.google.firebase:firebase-database:9.2.0'
     compile 'org.apache.commons:commons-math3:3.6.1'
     compile "com.badlogicgames.gdx:gdx-backend-android:1.9.4"
+
+    compile "org.androidannotations:androidannotations-api:$AAVersion"
 }
 
 apply plugin: 'com.google.gms.google-services'
